@@ -1,0 +1,81 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<div class="container site-content px-lg-5">
+    <div class="content-area">
+        <div class="calculator">{% csrf_token %}
+            <div class="my-3">
+                <h2>진수 계산기</h2>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <p>2진수 · 8진수 · 10진수 · 16진수 선택</p>
+                    <select class ="myselect" id="befor_type">
+                        <option value="binary">2진수</option>
+                        <option value="octal">8진수</option>
+                        <option value="decimal">10진수</option>
+                        <option value="hexadecimal">16진수</option>
+                    </select>
+                    <i class="bi bi-arrow-right m-2"></i>
+                    <select class ="myselect" id="after_type">
+                        <option value="binary">2진수</option>
+                        <option value="octal">8진수</option>
+                        <option value="decimal">10진수</option>
+                        <option value="hexadecimal">16진수</option>
+                    </select>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1">계산할 값 입력</p>
+                    <input class="myinput" type="text" id="befor_num">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="getResult">
+                </div>
+                <div class="mt-3">
+                    <p>계산된 값 출력</p>
+                    <span>답 : </span><b><span id="after_num"></span></b>
+                </div>
+                <script>
+                    $('#getResult').click( function() {
+                        $.ajax({
+                            url:'{% url 'notation' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                'befor_type':$('#befor_type').val(),
+                                'befor_num':$('#befor_num').val(),
+                                'after_type':$('#after_type').val(),
+                            },
+                            success:function(result){
+                                $('#after_num').text(result['after_num']);
+                                console.log(result['after_num'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+        </div>
+        <div>
+            <h3 class="my-4"><b>진수 계산기 사용 방법</b></h3>
+            <p><b>진수 계산기는 정수만 지원합니다. 소수을 입력하면 오류가 발생합니다.</b></p>
+            <p>2진수 · 8진수 · 10진수 · 16진수을 상호변환할 수 있습니다. 첫 번째 드롭다운 목록에서 입력할 숫자의 진수 종류를 선택합니다. 두 번째 드롭다운 목록에서 계산된 숫자의 진수 종류를 선택합니다. 계산하기 버튼을 누르면 선택한 진수로 계산합니다.</p>
+            <h3 class="my-4">진수에 대한 설명</h3>
+            <p>진수는 수를 세는 방법 또는 단위를 말합니다.</p>
+            <ul>
+                <li>n진법이란 0 ~ (n-1)까지의 숫자로 수를 표현한 것을 말합니다.</li>
+                <li>2진법이란 0, 1 두 가지 숫자로 수를 표현한 것을 말합니다.</li>
+                <li>8진법이란 0 ~ 7까지의 8개의 숫자로 수를 표현한 것을 말합니다.</li>
+                <li>10진법이란 0 ~ 9까지의 10개의 숫자로 수를 표현한 것을 말합니다.</li>
+                <li>16진법이란 0 ~ 9, A(10), B(11), C(12), D(13), E(14), F(15)까지의 16개의 숫자로 수를 표현한 것을 말합니다.</li>
+            </ul>
+            <br>
+        </div>
+    </div>
+    {% include "components/widget.html"%}
+</div>
+{% endblock content %}
+
+

@@ -1,0 +1,102 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<div class="container site-content px-lg-5">
+    <div class="content-area">
+        <div class="calculator">{% csrf_token %}
+            <div class="my-3">
+                <h2>섭씨(℃) · 화씨(℉) 온도 변환기</h2>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>섭씨(℃) → 화씨(℉) 온도 변환기</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1">섭씨(℃) 입력</p>
+                    <input class="myinput" type="text" id="celsius">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="getCelsius">
+                </div>
+                <div class="mt-3">
+                    <p>화씨(℉) 출력</p>
+                    <span>답 : </span><b><span id="ansCelsius"></span></b>
+                </div>
+                <script>
+                    $('#getCelsius').click( function() {
+                        $.ajax({
+                            url:'{% url 'temperature' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                'celsius':$('#celsius').val(),
+                                "fahrenheit":"",
+                            },
+                            success:function(result){
+                                $('#ansCelsius').text(result['ansCelsius']);
+                                console.log(result['ansCelsius'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>화씨(℉) → 섭씨(℃) 온도 변환기</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1">화씨(℉) 입력</p>
+                    <input class="myinput" type="text" id="fahrenheit">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="getFahrenheit">
+                </div>
+                <div class="mt-3">
+                    <p>섭씨(℃) 출력</p>
+                    <span>답 : </span><b><span id="ansFahrenheit"></span></b>
+                </div>
+                <script>
+                    $('#getFahrenheit').click( function() {
+                        $.ajax({
+                            url:'{% url 'temperature' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                'fahrenheit':$('#fahrenheit').val(),
+                                "celsius":"",
+                            },
+                            success:function(result){
+                                $('#ansFahrenheit').text(result['ansFahrenheit']);
+                                console.log(result['ansFahrenheit'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div> 
+        </div>
+        <div>
+            <h3 class="my-4"><b>섭씨(℃) · 화씨(℉) 온도 변환기 사용 방법</b></h3>
+            <p><b>섭씨(℃) · 화씨(℉) 온도 변환기는 소수 세 번째 자리에서 반올림을 합니다.</b></p>
+            <p>대부분 국가에서는 섭씨(℃: Celsius) 온도 체계를 사용하지만 일부 국가(미국, 미얀마, 라이베리아, 벨리즈 등)에서는 화씨(℉: Fahrenheit) 온도 체계를 사용합니다.</p>
+            <p>섭씨와 화씨를 물로 비교하면 물이 어는 온도는 섭씨 0도(화씨 32도)이며, 물이 끓는 온도는 섭씨 100도(화씨 212도)입니다. </p>
+            <ul>
+                <li>섭씨(℃)를 화씨(℉)로 변환하고 싶으면 <b>섭씨(℃) → 화씨(℉) 온도 변환기(위)</b> 변환기를 사용하면 됩니다.</li>
+                <li>화씨(℉)를 섭씨(℃)로 변환하고 싶으면 <b>화씨(℉) → 섭씨(℃) 온도 변환기(아래)</b> 변환기를 사용하면 됩니다.</li>
+            </ul> 
+            <h3 class="my-4">섭씨(℃)를 화씨(℉)로 변환하는 방법</h3>
+            <p>섭씨(℃) 온도를 화씨(℉) 온도로 변환하는 방법은 다음 공식과 같습니다.</p>
+            <p class="content-box">℃ = (℉ − 32) × 5/9<br>℃ = (℉ − 32) ÷ 1.8</p>
+            <h3 class="my-4">화씨(℉)를 섭씨(℃)로 변환하는 방법</h3>
+            <p>화씨(℉) 온도를 섭씨(℃) 온도로 변환하는 방법은 다음 공식과 같습니다.</p>
+            <p class="content-box">℉ = (℃ × 9/5) ＋ 32 <br>℉ = (℃ × 1.8) ＋ 32</p>
+        </div>
+    </div>
+    {% include "components/widget.html"%}
+</div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<section class="pt-4">
+    <div class="container px-lg-5">
+        <div class="row gx-lg-5">
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><b>01</b></div>
+                        <h2 class="fs-4 fw-bold">진수 계산기</h2>
+                        <p class="my-3">2진수 · 8진수 · 10진수 · 16진수를 상호변환할 수 있습니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'notation' %}">사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-percent"></i></div>
+                        <h2 class="fs-4 fw-bold">퍼센트 계산기</h2>
+                        <p class="my-3">퍼센트 · 백분율 · 할인가를 계산할 수 있습니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'percent' %}">사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-card-heading"></i></div>
+                        <h2 class="fs-4 fw-bold">준비중</h2>
+                        <p class="my-3">새로운 계산기가 준비중입니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="">준비중</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,199 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<div class="container site-content px-lg-5">
+    <div class="content-area">``
+        <div class="calculator">{% csrf_token %}
+            <div class="my-3">
+                <h2>퍼센트 계산기</h2>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>전체값의 일정 비율에 해당하는 값을 계산</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1"><b>전체값</b>과 <b>일정 비율(%)</b>을 입력</p>
+                    <input class="myinput w-25" type="text" id="total_1" placeholder="전체값">
+                    <input class="myinput w-25" type="text" id="proportion_1" placeholder="비율(%)">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="get_total_value">
+                </div>
+                <div class="mt-3">
+                    <p><b>전체값</b>의 <b>일정 비율(%)</b>에 대한 값 출력</p>
+                    <span>답 : </span><b><span id="ans_total_value"></span></b>
+                </div>
+                <script>
+                    $('#get_total_value').click( function() {
+                        $.ajax({
+                            url:'{% url 'percent' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                "type":"total_to_value",
+                                "first":$('#total_1').val(),
+                                "second":$('#proportion_1').val(),
+                            },
+                            success:function(result){
+                                $('#ans_total_value').text(result['answer']);
+                                console.log(result['answer'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>전체값에 대한 일부값이 해당하는 비율을 계산</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1"><b>전체값</b>과 <b>일부값</b>을 입력</p>
+                    <input class="myinput w-25" type="text" id="total_2" placeholder="전체값">
+                    <input class="myinput w-25" type="text" id="some_2" placeholder="일부값">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="get_total_proportion">
+                </div>
+                <div class="mt-3">
+                    <p><b>전체값</b>에 대한 <b>일부값</b>이 해당하는 비율 출력</p>
+                    <span>답 : </span><b><span id="ans_total_proportion"></span></b>
+                </div>
+                <script>
+                    $('#get_total_proportion').click( function() {
+                        $.ajax({
+                            url:'{% url 'percent' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                "type":"total_to_proportion",
+                                "first":$('#total_2').val(),
+                                "second":$('#some_2').val(),
+                            },
+                            success:function(result){
+                                $('#ans_total_proportion').text(result['answer']);
+                                console.log(result['answer'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>기준값에서 일정 비율을 증가/감소한 값을 계산</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1"><b>기준값</b>과 <b>일정 비율(%)</b>을 입력</p>
+                    <input class="myinput w-25" type="text" id="standard_3" placeholder="기준값">
+                    <input class="myinput w-25" type="text" id="proportion_3" placeholder="비율(%)">
+                    <br>
+                    <select class ="myselect" id="inc_dec">
+                        <option value="up">증가</option>
+                        <option value="down">감소</option>
+                    </select>
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="get_standard_value">
+                </div>
+                <div class="mt-3">
+                    <p><b>기준값</b>에서 <b>일정 비율(%)</b>을 증가/감소한 값 출력</p>
+                    <span>답 : </span><b><span id="ans_standard_value"></span></b>
+                </div>
+                <script>
+                    $('#get_standard_value').click( function() {
+                        $.ajax({
+                            url:'{% url 'percent' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                "type":"standard_to_value",
+                                "first":$('#standard_3').val(),
+                                "second":$('#proportion_3').val(),
+                                "inc_dec":$('#inc_dec').val(),
+                            },
+                            success:function(result){
+                                $('#ans_standard_value').text(result['answer']);
+                                console.log(result['answer'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+            <div class="one-content-area">
+                <div class="mb-3">
+                    <h5><b>기준값이 변경값으로 변화하면 몇 퍼센트 증가/감소했는지 비율을 계산</b></h5>
+                </div>
+                <div class="my-3">
+                    <p class="mb-1"><b>기준값</b>과 <b>변경값</b>을 입력</p>
+                    <input class="myinput w-25" type="text" id="standard_4" placeholder="기준값">
+                    <input class="myinput w-25" type="text" id="change_4" placeholder="변경값">
+                </div>
+                <div class="my-3">
+                    <input class="btn btn-primary" type="submit" value="계산하기" id="get_standard_proportion">
+                </div>
+                <div class="mt-3">
+                    <p><b>기준값</b>이 <b>변경값</b>으로 변화하면 몇 퍼센트 증가/감소 비율 출력</p>
+                    <span>답 : </span><b><span id="ans_standard_proportion"></span></b>
+                </div>
+                <script>
+                    $('#get_standard_proportion').click( function() {
+                        $.ajax({
+                            url:'{% url 'percent' %}',
+                            dataType:'json',
+                            type:'POST',
+                            data:{
+                                "type":"standard_to_proportion",
+                                "first":$('#standard_4').val(),
+                                "second":$('#change_4').val(),
+                            },
+                            success:function(result){
+                                $('#ans_standard_proportion').text(result['answer']);
+                                console.log(result['answer'])
+                            },
+                            error:function(result){
+                                alert("입력값을 다시 확인해 주세요.");
+                            },
+                        });
+                    })
+                </script>
+            </div>
+        </div>
+        <div>
+            <h3 class="my-4"><b>퍼센트 계산기 사용 방법</b></h3>
+            <h4>전체값의 일정 비율에 해당하는 값을 계산</h4>
+            <p>전체값의 일정 비율에 해당하는 값을 계산할 수 있습니다. </p>
+            <p>2만원 상품을 구매할 때 20% 할인을 한다면 4천원을 할인받은 것을 구할 수 있습니다. 20000(전체값)의 20%(일정 비율)에 해당하는 값은 4000(할인가)입니다.</p>
+            <br>
+            <h4>전체값에 대한 일부값이 해당하는 비율을 계산</h4>
+            <p><b>전체값에 대한 일부값이 해당하는 비율은 소수 세 번째 자리에서 반올림을 합니다.</b></p>
+            <p>전체값에 대한 일부값이 해당하는 비율을 계산 할 수 있습니다.</p>
+            <p>5만원 상품을 구매할 때 1만원을 할인 받았다면 할인율은 20%인 것을 구할 수 있습니다. 50000(전체값)에 대한 10000(일부값)이 해당하는 비율은 20%(할인율)입니다.</p>
+            <br>
+            <h4>기준값에서 일정 비율을 증가/감소한 값을 계산</h4>
+            <p>기준값에서 일정 비율을 증가/감소한 값을 계산할 수 있습니다.</p>
+            <p>1만원 상품이 20% 가격을 인상하면 인상한 값 12000을 구할 수 있습니다. 10000(기준값)에서 20%(일정 비율)을 증가하면 12000(결과값)입니다. </p>
+            <p>5천원 상품이 30% 가격을 인하하면 인하한 값 3500을 구할 수 있습니다. 5000(기준값)에서 30%(일정 비율)을 감소하면 3500(결과값)입니다.</p>
+            <br>
+            <h4>기준값이 변경값으로 변화하면 몇 퍼센트 증가/감소했는지 비율을 계산</h4>
+            <p><b>기준값이 변경값으로 변화하면 몇 퍼센트 증가/감소했는지 비율은소수 세 번째 자리에서 반올림을 합니다.</b></p>
+            <p>기준값이 변경값으로 변화하면 몇 퍼센트 증가/감소했는지 비율을 계산할 수 있습니다.</p>
+            <p>5천원 상품이 6천원으로 가격이 인상하면 가격이 20% 증가한 것을 구할 수 있습니다. 5000(기준값)이 6000(변경값)으로 변화하면 20%(인상율) 증가입나다.</p>
+            <p>1만원 상품이 5천원으로 가격이 인하하면 가격이 50% 감소한 것을 구할 수 있습니다. 10000(기준값)이 5000(변경값)으로 변화하면 50%(인하율) 감소입니다.</p>
+            <h3 class="my-4"><b>퍼센트(백분율)에 대한 설명</b></h3>
+            <p><b>퍼센트</b>(percent) 또는 <b>백분율</b>(百分率)는 수를 100과의 비로 나타내는 방법입니다. 비율에 100을 곱한 값이며 기호는 %입니다. 예를 들어 32.1%는 0.321을 나타냅니다. "프로센트"(네덜란드어:procent)를 줄여 <b>프로</b>라고도 합니다.</p>
+            <br>
+        </div>
+    </div>
+    {% include "components/widget.html"%}
+</div>
+{% endblock content %}
+
+

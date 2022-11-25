@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+
+.site-content {
+    height: auto !important;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .site-content{
+        display: block;
+    }
+}
+
+.content-area {
+    height: auto !important;
+    width: 70%;
+    margin-right: 1.5rem !important;
+    margin-left: 1.5rem !important;
+}
+
+@media (max-width: 768px) {
+    .content-area{
+        width: auto;
+    }
+}
+
+.one-content-area {
+    border: 1px solid #dee2e6 !important;
+    border-width: 2px !important;
+    padding: 1rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.widget-area {
+    width: 30%;
+    margin-right: 1.5rem !important;
+    margin-left: 1.5rem !important;
+}
+
+@media (max-width: 768px) {
+    .widget-area{
+        width: auto;
+    }
+}
+
+.calculator {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    position: relative;
+    padding: 6px 20px 20px 20px;
+    border-radius: 4px;
+    border: 3px solid #8b8b8b;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.content-box {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    margin: 2px 5px 35px 5px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.widget-a {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.myinput {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-bottom: 1px solid #515151;  
+    width: 50% !important;
+    padding: 0.5rem !important;
+}
+
+.myselect {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    border-top: hidden;
+    border-right: hidden;
+    border-left: hidden;
+    border-bottom: 1px solid #515151;  
+    width: 25% !important;
+    padding: 0.5rem !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+}

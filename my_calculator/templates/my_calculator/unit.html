@@ -1,0 +1,40 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<section class="pt-4">
+    <div class="container px-lg-5">
+        <div class="row gx-lg-5">
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-thermometer-half"></i></div>
+                        <h2 class="fs-4 fw-bold">섭씨 · 화씨 온도 변환기</h2>
+                        <p class="my-3">섭씨(℃) · 화씨(℉) 온도를 변환할 수 있습니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'temperature' %}">사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-layers"></i></div>
+                        <h2 class="fs-4 fw-bold">넓이 면적 변환기</h2>
+                        <p class="my-3">제곱미터(m²) · 평(坪) · 스퀘어피트(ft²)를 상호 변환할 수 있습니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'area' %}">사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><b>kg</b></div>
+                        <h2 class="fs-4 fw-bold">질량 무게 변환기</h2>
+                        <p class="my-3">그램(g) · 킬로그램(kg) · 온스(oz) · 파운드(lb)를 상호 변환할 수 있습니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'mass' %}">사용하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

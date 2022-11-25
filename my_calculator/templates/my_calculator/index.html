@@ -1,0 +1,40 @@
+{% extends 'my_calculator_base/base_with_navbar.html' %}
+
+{% block content %}
+<section class="pt-4">
+    <div class="container px-lg-5">
+        <div class="row gx-lg-5">
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><b>M</b></div>
+                        <h2 class="fs-4 fw-bold">수학</h2>
+                        <p class="my-3">진수 계산 | 순열 | ... </p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'math' %}">수학 계산기 사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><b>SI</b></div>
+                        <h2 class="fs-4 fw-bold">단위 변환</h2>
+                        <p class="my-3">섭씨 화씨 온도 | ... </p>
+                        <a class="btn btn-primary btn-lg mt-3" href="{% url 'unit' %}">단위 변환기 사용하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xxl-4 mb-5">
+                <div class="card bg-light border-0 h-100">
+                    <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-card-heading"></i></div>
+                        <h2 class="fs-4 fw-bold">준비중...</h2>
+                        <p class="my-3">계산기 준비중입니다.</p>
+                        <a class="btn btn-primary btn-lg mt-3" href="">준비중</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
